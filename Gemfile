@@ -11,9 +11,13 @@ gem 'puma', '~> 3.0'
 gem 'redis', '~> 3.0'
 gem 'capistrano-rails', group: :development
 gem 'rack-cors'
+gem 'jwt', '~> 1.5'
+gem 'bcrypt', '~> 3.1.7'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry-rails', '~> 0.3.4'
 end
 
 group :development do
@@ -23,3 +27,4 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'annotate'

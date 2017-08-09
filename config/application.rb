@@ -19,7 +19,9 @@ Bundler.require(*Rails.groups)
 module Server
   class Application < Rails::Application
     config.api_only = true
+    config.autoload_paths << Rails.root.join('lib')
 
+    # rack-cros
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
