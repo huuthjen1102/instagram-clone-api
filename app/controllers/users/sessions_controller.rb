@@ -2,7 +2,8 @@ class Users::SessionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
 
   def create
-    user = User.find_by(email: params[:email])
+    find_condition = params[:email].present? ? { email: params[:email] } : { username: params[:username] }
+    user =  User.find_by(find_condition)
 
     if user && user.authenticate(params[:password])
       render json: user, serializer: CurrentUserSerializer, status: 201
