@@ -26,7 +26,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+  gem 'fog', '~> 1.41'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'annotate'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'figaro'
