@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       post 'sign_in', to: 'sessions#create'
     end
 
+    patch 'me/avatar', to: 'avatar_images#update'
+
     resources :posts, only: [:index, :create]
   end
 end

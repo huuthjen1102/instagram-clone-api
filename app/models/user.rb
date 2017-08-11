@@ -8,6 +8,7 @@
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  avatar          :string
 #
 # Indexes
 #
@@ -22,4 +23,6 @@ class User < ApplicationRecord
                     format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false }
+
+  mount_uploader :avatar, AvatarUploader
 end
