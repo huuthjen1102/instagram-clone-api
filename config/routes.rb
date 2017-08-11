@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
 
     patch 'me/avatar', to: 'avatar_images#update'
+    patch 'me',        to: 'users#update'
 
     resources :posts, only: [:index, :create]
   end
