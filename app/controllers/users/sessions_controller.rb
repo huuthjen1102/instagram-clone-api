@@ -1,7 +1,7 @@
 class Users::SessionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
 
-  # POST: api/users/sign_in
+  # POST: /api/users/sign_in
   # params: { email: string, password: string } or { username: string, password: string }
   def create
     find_condition = params[:email].present? ? { email: params[:email] } : { username: params[:username] }

@@ -3,6 +3,8 @@ class PostsController < ApplicationController
     render json: { posts: ['post1', 'post2'] }, status: 200
   end
 
+  # POST: /api/posts
+  # params: { caption: string, photo: image }
   def create
     @post = current_user.posts.build(post_params)
 

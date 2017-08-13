@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # PATH: api/me
+  # PATH: /api/me
   # params: { username: string, avatar: image }
   def update
     if current_user.update(user_params)

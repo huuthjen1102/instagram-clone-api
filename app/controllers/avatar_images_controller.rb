@@ -1,5 +1,5 @@
 class AvatarImagesController < ApplicationController
-  # PATCH: api/me/upload
+  # PATCH: /api/me/upload
   # params: { avatar: image }
   def update
     binding.pry

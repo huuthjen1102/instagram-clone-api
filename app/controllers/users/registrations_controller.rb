@@ -1,7 +1,7 @@
 class Users::RegistrationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
 
-  # POST api/users/sign_up
+  # POST /api/users/sign_up
   # params: { username: string, email: string, password: string, password_confirmation: string }
   def create
     user = User.new(user_params)
