@@ -10,5 +10,6 @@ CarrierWave.configure do |config|
     config.storage = :fog
   else
     config.storage = :file
+    config.asset_host = Rails.application.secrets.domain
   end
 end

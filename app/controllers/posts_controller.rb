@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
+  # GET: /api/posts
+  # params: {}
   def index
-    render json: { posts: ['post1', 'post2'] }, status: 200
+    @posts = Post.all
+    render json: @posts, status: 200
   end
 
   # POST: /api/posts
