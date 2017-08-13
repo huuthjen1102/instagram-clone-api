@@ -18,11 +18,16 @@
 class User < ApplicationRecord
   has_secure_password
 
+  # associations
+  has_many :posts, dependent: :destroy
+
+  # validations
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false }
 
+  # uploaders
   mount_uploader :avatar, AvatarUploader
 end
