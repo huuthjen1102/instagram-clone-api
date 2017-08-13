@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   # GET: /api/posts
   # params: {}
   def index
-    @posts = Post.all
-    render json: @posts, status: 200
+    @posts = Post.includes(:user).all.order(created_at: :desc)
+    render json: @posts, include: 'user', status: 200
   end
 
   # POST: /api/posts
