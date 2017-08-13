@@ -20,5 +20,9 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :photo, :caption
+  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id
+
+  def photo_url
+    object.photo.url
+  end
 end
