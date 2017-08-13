@@ -9,6 +9,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  filter     :string
+#  address    :string
+#  lat        :float
+#  lng        :float
 #
 # Indexes
 #
