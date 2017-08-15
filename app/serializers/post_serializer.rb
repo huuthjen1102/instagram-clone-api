@@ -24,7 +24,7 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address
+  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address, :likes_count
   belongs_to :user, serializer: SimpleUserSerializer
 
   def photo_url

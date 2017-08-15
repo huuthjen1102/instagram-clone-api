@@ -2,7 +2,6 @@ class AvatarImagesController < ApplicationController
   # PATCH: /api/me/upload
   # params: { avatar: image }
   def update
-    binding.pry
     if current_user.update(avatar: params[:avatar])
       render json: { url: current_user.avatar.url(:thumb) }, status: 200
     else

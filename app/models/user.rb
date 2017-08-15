@@ -32,4 +32,12 @@ class User < ApplicationRecord
 
   # uploaders
   mount_uploader :avatar, AvatarUploader
+
+  def like!(post)
+    likes.where(post_id: post.id).first_or_create!
+  end
+
+  def dislike!(post)
+    likes.where(post_id: post.id).destroy_all
+  end
 end
