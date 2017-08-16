@@ -1,4 +1,4 @@
-class SimpleUserSerializer < ActiveModel::Serializer
+class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :avatar_url
 
   def avatar_url

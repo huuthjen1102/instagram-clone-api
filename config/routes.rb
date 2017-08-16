@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'sign_in',                 to: 'sessions#create'
       get ':username/posts',          to: 'posts#index',          as: 'public_profile_posts'
       get ':username/public_profile', to: 'public_profiles#show', as: 'public_profile'
+      get ':username/followers',      to: 'followers#index'
     end
 
     patch 'me/avatar', to: 'avatar_images#update'

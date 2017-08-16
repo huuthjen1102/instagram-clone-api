@@ -30,7 +30,7 @@ class PostSerializer < ActiveModel::Serializer
   attributes :id, :photo_url, :caption, :filter, :created_at,
              :user_id, :lat_lng, :address, :place_id, :likes_count, :comments_count
 
-  belongs_to :user, serializer: SimpleUserSerializer
+  belongs_to :user
   has_many :comments
 
   def lat_lng

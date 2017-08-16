@@ -5,7 +5,7 @@ class Users::PostsController < ApplicationController
   # params: {}
   def index
     if @user.present?
-      render json: @user.posts, each_serializer: SimplePostSerializer, status: 200
+      render json: @user.posts.order(created_at: :desc), each_serializer: SimplePostSerializer, status: 200
     else
       render json: { errors: ['User not found'] }, status: 404
     end
