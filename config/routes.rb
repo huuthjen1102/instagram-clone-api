@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :users do
       post 'sign_up',                 to: 'registrations#create'
       post 'sign_in',                 to: 'sessions#create'
+      post 'facebook/login',          to: 'facebook_logins#create'
       get ':username/posts',          to: 'posts#index',          as: 'public_profile_posts'
       get ':username/public_profile', to: 'public_profiles#show', as: 'public_profile'
       get ':username/followers',      to: 'followers#index'

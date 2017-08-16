@@ -9,10 +9,12 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  avatar          :string
+#  facebook_id     :string
 #
 # Indexes
 #
-#  index_users_on_username  (username) UNIQUE
+#  index_users_on_facebook_id  (facebook_id)
+#  index_users_on_username     (username) UNIQUE
 #
 
 class User < ApplicationRecord
@@ -30,9 +32,9 @@ class User < ApplicationRecord
 
   # validations
   validates :email, presence: true, uniqueness: { case_sensitive: false },
-                    format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
+                    format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }, unless: :facebook_login?
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..20 }
-  validates :password, length: { minimum: 8 }
+  validates :password, length: { minimum: 8 }, unless: :facebook_login?
 
   # uploaders
   mount_uploader :avatar, AvatarUploader
@@ -56,5 +58,16 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following_ids.include?(other_user.id)
+  end
+
+  def avatar_url(options = {})
+    return super(options) unless facebook_login?
+    "http://graph.facebook.com/#{facebook_id}/picture?type=normal"
+  end
+
+  private
+
+  def facebook_login?
+    facebook_id.present?
   end
 end

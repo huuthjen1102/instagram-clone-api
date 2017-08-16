@@ -9,10 +9,12 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  avatar          :string
+#  facebook_id     :string
 #
 # Indexes
 #
-#  index_users_on_username  (username) UNIQUE
+#  index_users_on_facebook_id  (facebook_id)
+#  index_users_on_username     (username) UNIQUE
 #
 
 class UserSerializer < ActiveModel::Serializer

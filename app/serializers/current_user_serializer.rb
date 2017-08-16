@@ -9,7 +9,7 @@ class CurrentUserSerializer < ActiveModel::Serializer
     {
       email: object.email,
       username: object.username,
-      avatar_url: object.avatar.url(:thumb)
+      avatar_url: object.avatar_url(:thumb)
     }
   end
 end
