@@ -26,7 +26,9 @@
 
 class PostSerializer < ActiveModel::Serializer
   attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address, :likes_count, :comments_count
+
   belongs_to :user, serializer: SimpleUserSerializer
+  has_many :comments
 
   def photo_url
     object.photo.url
