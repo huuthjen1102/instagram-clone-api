@@ -14,10 +14,12 @@
 #  lng            :float
 #  likes_count    :integer          default(0)
 #  comments_count :integer          default(0)
+#  place_id       :integer
 #
 # Indexes
 #
-#  index_posts_on_user_id  (user_id)
+#  index_posts_on_place_id  (place_id)
+#  index_posts_on_user_id   (user_id)
 #
 # Foreign Keys
 #
@@ -25,7 +27,8 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address, :likes_count, :comments_count
+  attributes :id, :photo_url, :caption, :filter, :created_at,
+             :user_id, :lat_lng, :address, :place_id, :likes_count, :comments_count
 
   belongs_to :user, serializer: SimpleUserSerializer
   has_many :comments
