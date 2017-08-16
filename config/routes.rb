@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       get ':username/public_profile', to: 'public_profiles#show', as: 'public_profile'
       get ':username/followers',      to: 'followers#index'
       get ':username/following',      to: 'following#index'
+
+      resources :notifications, only: [:index]
     end
 
     patch 'me/avatar', to: 'avatar_images#update'

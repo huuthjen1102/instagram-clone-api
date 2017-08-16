@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816065323) do
+ActiveRecord::Schema.define(version: 20170816074817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 20170816065323) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id", using: :btree
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "actor_id"
+    t.integer  "recipient_id"
+    t.datetime "read_at"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "pristine",        default: true
+    t.string   "action_type"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
