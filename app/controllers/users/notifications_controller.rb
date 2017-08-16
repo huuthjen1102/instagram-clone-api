@@ -9,4 +9,5 @@ class Users::NotificationsController < ApplicationController
     @notification = current_user.notifications.find(params[:id])
     @notification.update(read_at: Time.current)
     head 204
+  end
 end

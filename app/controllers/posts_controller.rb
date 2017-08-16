@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   # params: {}
   def index
     @posts = Post.includes(:user, comments: [:user]).all.order(created_at: :desc)
-    render json: @posts, status: 200
+                 .paginate(page: params[:page], per_page: 20)
+    render json: @posts, meta: pagination_dict(@posts), status: 200
   end
 
   # POST: /api/posts
