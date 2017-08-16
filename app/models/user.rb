@@ -29,11 +29,10 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy, foreign_key: 'recipient_id'
 
   # validations
-  validates :email, presence: true,
-                    uniqueness: { case_sensitive: false },
+  validates :email, presence: true, uniqueness: { case_sensitive: false },
                     format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
-  validates :username, presence: true,
-                       uniqueness: { case_sensitive: false }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..20 }
+  validates :password, length: { minimum: 8 }
 
   # uploaders
   mount_uploader :avatar, AvatarUploader
