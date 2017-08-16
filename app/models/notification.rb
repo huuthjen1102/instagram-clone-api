@@ -19,7 +19,12 @@
 #
 
 class Notification < ApplicationRecord
+  # associations
   belongs_to :actor, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
   belongs_to :notifiable, polymorphic: true
+
+  # scopes
+  scope :unread,   -> { where(read_at: nil) }
+  scope :pristine, -> { where(pristine: true) }
 end
