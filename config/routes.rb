@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       get ':username/followers',      to: 'followers#index'
       get ':username/following',      to: 'following#index'
 
-      resources :notifications, only: [:index]
+      resources :notifications, only: [:index, :update]
       resources :notification_counts, only: [:show, :destroy]
     end
 

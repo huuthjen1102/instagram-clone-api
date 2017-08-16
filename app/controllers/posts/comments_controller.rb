@@ -7,6 +7,7 @@ class Posts::CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
 
     if @comment.save
+      create_notification('COMMENT_ON_POST')
       render json: @comment, status: 201
     else
       render json: { errors: @comment.errors.full_messages }, status: 422
@@ -21,5 +22,11 @@ class Posts::CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+  end
+
+  def create_notification(action_type)
+    unless @post.user.id == current_user.id
+      Notification.create(actor: current_user, recipient: @post.user, notifiable: @post, action_type: action_type)
+    end
   end
 end

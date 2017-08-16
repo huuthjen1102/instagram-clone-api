@@ -5,10 +5,7 @@ class Posts::LikesController < ApplicationController
   # params: {}
   def create
     current_user.like!(@post)
-    unless @post.user.id == current_user.id
-      Notification.create(actor: current_user, recipient: @post.user,
-                          notifiable: @post, action_type: 'LIKE_POST')
-    end
+    create_notification('LIKE_POST')
     head 204
   end
 
@@ -23,5 +20,11 @@ class Posts::LikesController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+  end
+
+  def create_notification(action_type)
+    unless @post.user.id == current_user.id
+      Notification.create(actor: current_user, recipient: @post.user, notifiable: @post, action_type: action_type)
+    end
   end
 end
