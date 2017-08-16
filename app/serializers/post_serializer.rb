@@ -30,10 +30,6 @@ class PostSerializer < ActiveModel::Serializer
   belongs_to :user, serializer: SimpleUserSerializer
   has_many :comments
 
-  def photo_url
-    object.photo.url
-  end
-
   def lat_lng
     { lat: object.lat, lng: object.lng }
   end

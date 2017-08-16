@@ -1,6 +1,8 @@
 class Posts::CommentsController < ApplicationController
   before_action :set_post, only: [:create]
 
+  # POST: /api/posts/:post_id/comments
+  # params: { body: text }
   def create
     @comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
 

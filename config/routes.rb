@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :users do
       post 'sign_up', to: 'registrations#create'
       post 'sign_in', to: 'sessions#create'
+      get ':username/posts', to: 'posts#index', as: 'public_profile_posts'
+      get ':username/public_profile', to: 'public_profiles#show', as: 'public_profile'
     end
 
     patch 'me/avatar', to: 'avatar_images#update'
