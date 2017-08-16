@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get ':username/posts',          to: 'posts#index',          as: 'public_profile_posts'
       get ':username/public_profile', to: 'public_profiles#show', as: 'public_profile'
       get ':username/followers',      to: 'followers#index'
+      get ':username/following',      to: 'following#index'
     end
 
     patch 'me/avatar', to: 'avatar_images#update'
