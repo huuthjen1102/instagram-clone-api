@@ -2,17 +2,18 @@
 #
 # Table name: posts
 #
-#  id          :integer          not null, primary key
-#  caption     :text
-#  photo       :string
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  filter      :string
-#  address     :string
-#  lat         :float
-#  lng         :float
-#  likes_count :integer          default(0)
+#  id             :integer          not null, primary key
+#  caption        :text
+#  photo          :string
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  filter         :string
+#  address        :string
+#  lat            :float
+#  lng            :float
+#  likes_count    :integer          default(0)
+#  comments_count :integer          default(0)
 #
 # Indexes
 #
@@ -24,7 +25,7 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address, :likes_count
+  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address, :likes_count, :comments_count
   belongs_to :user, serializer: SimpleUserSerializer
 
   def photo_url

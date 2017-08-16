@@ -2,17 +2,18 @@
 #
 # Table name: posts
 #
-#  id          :integer          not null, primary key
-#  caption     :text
-#  photo       :string
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  filter      :string
-#  address     :string
-#  lat         :float
-#  lng         :float
-#  likes_count :integer          default(0)
+#  id             :integer          not null, primary key
+#  caption        :text
+#  photo          :string
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  filter         :string
+#  address        :string
+#  lat            :float
+#  lng            :float
+#  likes_count    :integer          default(0)
+#  comments_count :integer          default(0)
 #
 # Indexes
 #
@@ -28,6 +29,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
 
   # validations
   validates :photo, presence: true
