@@ -14,6 +14,15 @@ class Posts::CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = @post.comments.find(params[:id])
+    unless @comment.user == current_user
+      render json: { errors: ['Permission denied'] }, status: 422
+    end
+    @comment.destroy
+    head 204
+  end
+
   private
 
   def comment_params
