@@ -15,6 +15,7 @@
 #  likes_count    :integer          default(0)
 #  comments_count :integer          default(0)
 #  place_id       :integer
+#  filter_style   :json
 #
 # Indexes
 #

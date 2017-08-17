@@ -15,6 +15,7 @@
 #  likes_count    :integer          default(0)
 #  comments_count :integer          default(0)
 #  place_id       :integer
+#  filter_style   :json
 #
 # Indexes
 #
@@ -28,7 +29,7 @@
 
 class PostSerializer < ActiveModel::Serializer
   attributes :id, :photo_url, :caption, :filter, :created_at,
-             :user_id, :lat_lng, :address, :place_id, :likes_count, :comments_count
+             :user_id, :lat_lng, :address, :place_id, :likes_count, :comments_count, :filter_style
 
   belongs_to :user
   has_many :comments
