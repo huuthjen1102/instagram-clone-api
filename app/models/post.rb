@@ -32,6 +32,8 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
   has_many :comments, dependent: :destroy
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
 
   # validations
   validates :photo, presence: true
@@ -39,4 +41,13 @@ class Post < ApplicationRecord
 
   # uploaders
   mount_uploader :photo, PhotoUploader
+
+  # triggers
+  after_create :create_tags
+
+  def create_tags
+    caption.scan(/#\w+/).map do |tag_name|
+      self.tags.where(name: tag_name).first_or_create
+    end
+  end
 end
