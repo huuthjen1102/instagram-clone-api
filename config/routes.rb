@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'posts/tags/:tag_name', to: 'tags/posts#index'
     resources :posts, only: [:index, :create] do
       resource :likes, only: [:create, :destroy], module: :posts
-      resource :comments, only: [:create, :destroy], module: :posts
+      resource :comments, only: [:index, :create, :destroy], module: :posts
     end
     resources :locations, only: [:show]
   end

@@ -28,13 +28,27 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :photo_url, :caption, :filter, :created_at,
-             :user_id, :lat_lng, :address, :place_id, :likes_count, :comments_count, :filter_style
+  attributes :id, :photo_url, :caption, :filter, :created_at, :user_id, :lat_lng, :address,
+             :place_id, :likes_count, :comments_count, :filter_style, :comment_pagination
 
   belongs_to :user
   has_many :comments
 
   def lat_lng
     { lat: object.lat, lng: object.lng }
+  end
+
+  def comments
+    object.comments.latest.paginate(page: 1)
+  end
+
+  def comment_pagination
+    {
+      current_page: object.comments.current_page,
+      prev_page: object.comments.previous_page,
+      next_page: object.comments.next_page,
+      total_pages: object.comments.total_pages,
+      total_count: object.comments.total_entries
+    }
   end
 end

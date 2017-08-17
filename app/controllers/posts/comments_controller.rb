@@ -1,5 +1,12 @@
 class Posts::CommentsController < ApplicationController
-  before_action :set_post, only: [:create]
+  before_action :set_post
+
+  # GET: /api/posts/:post_id/comments
+  # params: {}
+  def index
+    @comments = @post.comments.includes(:user).latest.paginate(page: params[:page])
+    render json: @comments, meta: pagination_dict(@comments), status: 200
+  end
 
   # POST: /api/posts/:post_id/comments
   # params: { body: text }
@@ -14,6 +21,8 @@ class Posts::CommentsController < ApplicationController
     end
   end
 
+  # DELETE: /api/posts/:post_id/comments/:id
+  # params: {}
   def destroy
     @comment = @post.comments.find(params[:id])
     unless @comment.user == current_user

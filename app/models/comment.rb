@@ -21,10 +21,15 @@
 #
 
 class Comment < ApplicationRecord
+  self.per_page = 5
+
   # associations
   belongs_to :user
   belongs_to :post, counter_cache: true
 
   # validations
   validates :body, presence: true
+
+  # scopes
+  scope :latest, -> { order(created_at: :desc) }
 end
