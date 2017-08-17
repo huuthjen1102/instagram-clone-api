@@ -18,7 +18,7 @@
 #
 
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
 
   # associations
   has_many :posts, dependent: :destroy
@@ -61,8 +61,8 @@ class User < ApplicationRecord
   end
 
   def avatar_url(options = {})
-    return super(options) unless facebook_login?
-    "http://graph.facebook.com/#{facebook_id}/picture?type=normal"
+    return super(options) unless facebook_login? || avatar.url.present?
+    "http://graph.facebook.com/#{facebook_id}/picture?type=large"
   end
 
   private
