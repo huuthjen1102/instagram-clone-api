@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post 'follow/:user_id',     to: 'relationships#create'
     delete 'unfollow/:user_id', to: 'relationships#destroy'
 
+    get 'posts/tags/:tag_name', to: 'tags/posts#index'
     resources :posts, only: [:index, :create] do
       resource :likes, only: [:create, :destroy], module: :posts
       resource :comments, only: [:create], module: :posts
