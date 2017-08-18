@@ -32,9 +32,16 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy, foreign_key: 'recipient_id'
 
   # validations
-  validates :email, presence: true, uniqueness: { case_sensitive: false },
-                    format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }, unless: :facebook_login?
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..20 }
+  EMAIL_REGEX    = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  USERNAME_REGEX = /\A[a-zA-Z0-9_-]{3,30}\z/
+
+  validates :email, presence: true,
+                    uniqueness: { case_sensitive: false },
+                    format: { with: EMAIL_REGEX }, unless: :facebook_login?
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
+                       format: { with: USERNAME_REGEX, message: 'should be one word' },
+                       unless: :facebook_login?
   validates :password, length: { minimum: 8 }, unless: :facebook_login?
 
   # uploaders
