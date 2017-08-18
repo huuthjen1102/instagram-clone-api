@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get ':username/following',      to: 'following#index'
 
       resources :notifications, only: [:index, :update]
-      resources :notification_counts, only: [:show, :destroy]
+      resource :notification_counts, only: [:show, :destroy]
     end
 
     patch 'me/avatar', to: 'avatar_images#update'

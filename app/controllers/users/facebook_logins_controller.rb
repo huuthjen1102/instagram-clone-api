@@ -1,4 +1,6 @@
 class Users::FacebookLoginsController < ApplicationController
+  # POST: /api/users/facebook/login
+  # params: { facebook_id: string, username: string }
   def create
     @user = User.find_by(facebook_id: params[:facebook_id]) if params[:facebook_id].present?
     if @user

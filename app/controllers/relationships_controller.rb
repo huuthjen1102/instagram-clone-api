@@ -30,11 +30,7 @@ class RelationshipsController < ApplicationController
   end
 
   def create_notification(action_type)
-    notification = Notification.create(actor: current_user, recipient: @target_user, notifiable: @target_user, action_type: action_type)
-
-    ActionCable.server.broadcast(
-      "web_notifcations_#{@target_user.id}",
-      NotificationSerializer.new(notification)
-    )
+    notification = Notification.create(actor: current_user, recipient: @target_user,
+                                       notifiable: @target_user, action_type: action_type)
   end
 end

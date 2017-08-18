@@ -27,4 +27,13 @@ class Notification < ApplicationRecord
   # scopes
   scope :unread,   -> { where(read_at: nil) }
   scope :pristine, -> { where(pristine: true) }
+
+  # triggers
+  after_create :send_notification
+
+  private
+
+  def send_notification
+    NotificationSenderJob.perform_later(self)
+  end
 end

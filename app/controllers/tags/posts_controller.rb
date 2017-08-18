@@ -1,6 +1,8 @@
 class Tags::PostsController < ApplicationController
   before_action :set_tag, only: [:index]
 
+  # GET: posts/tags/:tag_name
+  # params: {}
   def index
     if @tag.present?
       @posts = @tag.posts.includes(:user, comments: [:user])
