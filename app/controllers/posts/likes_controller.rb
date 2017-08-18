@@ -28,7 +28,7 @@ class Posts::LikesController < ApplicationController
 
       ActionCable.server.broadcast(
         "web_notifcations_#{@post.user.id}",
-        json: NotificationSerializer.new(notification).to_json
+        NotificationSerializer.new(notification)
       )
     end
   end

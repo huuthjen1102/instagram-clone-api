@@ -39,6 +39,8 @@ class NotificationSerializer < ActiveModel::Serializer
       like_post_meta_data
     when 'START_FOLLOWING'
       start_following_meta_data
+    when 'COMMENT_ON_POST'
+      comment_on_post_meta_data
     end
   end
 
@@ -50,5 +52,9 @@ class NotificationSerializer < ActiveModel::Serializer
 
   def start_following_meta_data
     { follower_ids: object.notifiable.follower_ids }
+  end
+
+  def comment_on_post_meta_data
+    CommentSerializer.new(object.notifiable.comments.last)
   end
 end

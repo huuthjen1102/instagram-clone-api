@@ -34,7 +34,7 @@ class RelationshipsController < ApplicationController
 
     ActionCable.server.broadcast(
       "web_notifcations_#{@target_user.id}",
-      json: NotificationSerializer.new(notification).to_json
+      NotificationSerializer.new(notification)
     )
   end
 end
