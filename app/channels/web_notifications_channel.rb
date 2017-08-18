@@ -1,6 +1,6 @@
 class WebNotificationsChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
+    stream_from "web_notifcations_#{params[:username]}"
   end
 
   def unsubscribed
