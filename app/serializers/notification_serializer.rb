@@ -19,7 +19,7 @@
 #
 
 class NotificationSerializer < ActiveModel::Serializer
-  attributes :id, :actor, :action_type, :read_at, :notifiable_id, :notifiable_type, :photo_url
+  attributes :id, :actor, :action_type, :read_at, :notifiable_id, :notifiable_type, :photo_url, :meta_data
 
   def actor
     {
@@ -31,5 +31,18 @@ class NotificationSerializer < ActiveModel::Serializer
 
   def photo_url
     return object.notifiable.photo_url if object.notifiable_type == 'Post'
+  end
+
+  def meta_data
+    case object.action_type
+    when 'LIKE_POST'
+      like_post_meta_data
+    end
+  end
+
+  private
+
+  def like_post_meta_data
+    { like_count: object.notifiable.reload.likes_count }
   end
 end
