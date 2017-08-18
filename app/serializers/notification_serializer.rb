@@ -37,6 +37,8 @@ class NotificationSerializer < ActiveModel::Serializer
     case object.action_type
     when 'LIKE_POST'
       like_post_meta_data
+    when 'START_FOLLOWING'
+      start_following_meta_data
     end
   end
 
@@ -44,5 +46,9 @@ class NotificationSerializer < ActiveModel::Serializer
 
   def like_post_meta_data
     { like_count: object.notifiable.reload.likes_count }
+  end
+
+  def start_following_meta_data
+    { follower_ids: object.notifiable.follower_ids }
   end
 end
