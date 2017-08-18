@@ -22,10 +22,13 @@ Rails.application.routes.draw do
     delete 'unfollow/:user_id', to: 'relationships#destroy'
 
     get 'posts/tags/:tag_name', to: 'tags/posts#index'
+
     resources :posts, only: [:index, :create] do
       resource :likes, only: [:create, :destroy], module: :posts
       resource :comments, only: [:index, :create, :destroy], module: :posts
     end
+
     resources :locations, only: [:show]
+    resources :follow_suggestions, only: [:index]
   end
 end
