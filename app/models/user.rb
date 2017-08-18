@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url(options = {})
-    return super(options) unless facebook_login? || avatar.url.present?
+    return super(options) unless facebook_login? || avatar.url.blank?
     "http://graph.facebook.com/#{facebook_id}/picture?type=large"
   end
 
